@@ -1,0 +1,65 @@
+<div class="title">
+  <h1>Add New Event</h1>
+</div>
+<div class="events row">
+
+  <div class="col-lg-4 col-10 eventInfoCard">
+    <form name = "addNewEvent" class="addNewEvent" action="/addNewEvent" method="post" enctype="multipart/form-data">
+      <div class="card">
+        <div class="card-body">
+
+          <h4 class="name"><b>Name</b>:</h4>
+          <input type="text" name="name" class="formTextInput"  placeholder="Enter Name" required>
+
+          <h4 class="date"><b>Date:</b> </h4>
+          <input type="text" name="date" class="formTextInput" placeholder="Enter Date" required>
+
+          <h4 class="name"><b>Location:</b> </h4>
+          <input type="text" name="location" class="formTextInput" placeholder="Enter Location" required>
+
+          <h4 class="name"><b>Cost:</b> </h4>
+          <input type="text" name="cost" class="formTextInput"  placeholder="Enter Cost" required>
+
+          <h4 class="name"><b>Short Description:</b> </h4>
+          <input type="text" name="shortDescription" class="formTextInput" placeholder="Enter Short Description" required>
+
+          <h4 class="name"><b>Description:</b> </h4>
+          <input type="text" name="description" class="formTextInput"  placeholder="Enter Description" required>
+
+          <h4 class="name"><b>Image:</b> </h4>
+          <input type="file" name="poster" class="formTextInput"  accept="image/*" required>
+
+          <h4 class="name"><b>Timeslots:</b></h4>
+          <input type="text" name="timeslots" class="formTextInput" placeholder="Enter Cash Time Slots" required>
+
+          <h4 class="name"><b>Display:</b> </h4>
+          <select name="display" class="formTextInput" placeholder="Enter Display" required>
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>
+
+          <h4 class="name"><b>Questions:</b> </h4>
+          <input type="text" name="questions" class="formTextInput"  placeholder="Enter questions seperated by a comma, if none, enter 0"required>
+
+          <h4 class="name"><b>Notes:</b> </h4>
+          <input type="text" name="notes" class="formTextInput" placeholder="Enter notes seperated by a comma" required>
+
+
+          <h4 class="name"><b>Credit/Debit Stripe Url:</b> </h4>
+          <input type="text" name="stripe" class="formTextInput" placeholder="Enter Stripe URL payment link"required>
+
+
+          <h4 class="name"><b>Google Maps Link:</b> </h4>
+          <input type="text" name="googleMaps" class="formTextInput"  placeholder="Enter Google Maps Link" required>
+
+          <h4 class="name"><b>Order:</b> </h4>
+          <input type="text" name="order" class="formTextInput"  placeholder="Enter the order number of the event" required>
+
+          <button type="submit" class="btn addNewEventButton">Add New Event</button>
+
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>

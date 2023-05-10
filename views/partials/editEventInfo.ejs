@@ -1,0 +1,73 @@
+<div class="title">
+  <h1><%=eventInfo['name']%></h1>
+</div>
+<div class="events row">
+
+  <div class="col-lg-4 col-10 eventInfoCard">
+    <form name = "eventEdit" action="/editEvent:<%=eventInfo['_id']%>" method="post" enctype="multipart/form-data">
+      <div class="card">
+        <img src="<%=eventInfo.image%>" class="card-img-top" alt="...">
+        <div class="card-body">
+
+          <h4 class="name"><b>Name:</b></h4>
+          <input type="text" name="name" class="formTextInput" value="<%=eventInfo.name%>" placeholder="<%=eventInfo.name%>">
+
+          <h4 class="date"><b>Date:</b> </h4>
+          <input type="text" name="date" class="formTextInput" value="<%=eventInfo.date%>" placeholder="<%=eventInfo.date%>">
+
+          <h4 class="name"><b>Location:</b> </h4>
+          <input type="text" name="location" class="formTextInput" value="<%=eventInfo.location%>" placeholder="<%=eventInfo.location%>">
+
+          <h4 class="name"><b>Cost:</b> </h4>
+          <input type="text" name="cost" class="formTextInput" value="<%=eventInfo.cost%>" placeholder="<%=eventInfo.cost%>">
+
+          <h4 class="name"><b>Short Description:</b> </h4>
+          <input type="text" name="shortDescription" class="formTextInput" value="<%=eventInfo.shortDescription%>" placeholder="<%=eventInfo.shortDescription%>">
+
+          <h4 class="name"><b>Description:</b> </h4>
+          <input type="text" name="description" class="formTextInput" value="<%=eventInfo.description%>" placeholder="<%=eventInfo.description%>">
+
+          <h4 class="name"><b>Image:</b> </h4>
+          <input type="file" name="poster" class="formTextInput"  accept="image/*">
+
+          <h4 class="name"><b>Timeslots:</b></h4>
+          <input type="text" name="timeslots" class="formTextInput" value="<%=eventInfo.timeslots%>" placeholder="<%=eventInfo.timeslots%>">
+
+          <h4 class="name"><b>Display:</b> </h4>
+          <select name="display" class="formTextInput" value="<%=eventInfo.display%>" placeholder="<%=eventInfo.display%>">
+
+            <% if (eventInfo.display == "true"){ %>
+            <option value="true">True</option>
+            <option value="false">False</option>
+            <% }else{ %>
+              <option value="false">False</option>
+              <option value="true">True</option>
+              <% } %>
+          </select>
+
+          <h4 class="name"><b>Questions:</b> </h4>
+          <input type="text" name="questions" class="formTextInput" value="<%=eventInfo.questions%>" placeholder="<%=eventInfo.questions%>">
+
+          <h4 class="name"><b>Notes:</b> </h4>
+          <input type="text" name="notes" class="formTextInput" value="<%=eventInfo.notes%>" placeholder="<%=eventInfo.notes%>">
+
+          <h4 class="name"><b>Credit/Debit Stripe Url:</b> </h4>
+          <input type="text" name="stripe" class="formTextInput" value="<%=eventInfo.stripe%>" placeholder="<%=eventInfo.stripe%>">
+
+
+
+          <h4 class="name"><b>Google Maps:</b> </h4>
+          <input type="text" name="googleMaps" class="formTextInput" value="<%=eventInfo.googleMaps%>" placeholder="<%=eventInfo.googleMaps%>">
+
+          <h4 class="name"><b>Order:</b> </h4>
+          <input type="text" name="order" class="formTextInput" value="<%=eventInfo.order%>" placeholder="<%=eventInfo.order%>">
+
+
+          <button type="submit" class="btn editButton">Edit</button>
+
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
