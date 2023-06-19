@@ -329,7 +329,7 @@ export async function fetchPosts(): Promise<postInfo[]> {
   }
 }
 
-export async function updatePost(id: string, info: postInfo, coverImagePath: string | null): Promise<void> {
+export async function updatePost(id: string, info: postInfo, imagesPath: string[] | null, coverImagePath: string|null): Promise<void> {
   try {
     const database = client.db("blog");
     const postsCollection = database.collection("posts");
@@ -339,29 +339,21 @@ export async function updatePost(id: string, info: postInfo, coverImagePath: str
     };
     // create a document that sets the plot of the movie
     let updateDoc: AnyObject = {}
-    if (coverImagePath != null) {
       updateDoc = {
         $set: {
           name: info["name"],
           date: info["date"],
-          image: coverImagePath,
+          images: imagesPath,
+          coverImage: coverImagePath,
           caption: info["caption"],
           order: info["order"]
         },
       };
-    } else {
-      updateDoc = {
-        $set: {
-          name: info["name"],
-          date: info["date"],
-          caption: info["caption"],
-          order: info["order"]
-        },
-      };
-    }
+
+ 
     // console.log(updateDoc)
     const action = await postsCollection.updateOne(filter, updateDoc);
-    console.log(action)
+    // console.log(action)
 
     // console.log(result)
   } finally {
@@ -385,7 +377,7 @@ export async function getPostInfo(id: string): Promise<postInfo> {
   }
 }
 
-export async function addNewPost(info: postInfo, coverImagePath: string | null): Promise<void> {
+export async function addNewPost(info: postInfo, imagesPath: string[] | null, coverImagePath: string|null): Promise<void> {
   try {
     const database = client.db("blog");
     const postCollection = database.collection("posts");
@@ -393,12 +385,27 @@ export async function addNewPost(info: postInfo, coverImagePath: string | null):
       name: info["name"],
       date: info["date"],
       caption: info["caption"],
-      image: coverImagePath,
+      images: imagesPath,
       order: info["order"]
     };
     const action = await postCollection.insertOne(updateDoc);
     // console.log(result)
   } finally {
+    // await client.close();
+  }
+}
+
+export async function deletePost(id: string): Promise<void> {
+  try {
+    const database = client.db("blog");
+    const postsCollection = database.collection("posts");
+    const query = {
+      _id: new ObjectId(id)
+    };
+    const action = await postsCollection.deleteOne(query)
+    // console.log(eventInfo)
+  } finally {
+    // Ensures that the client will close when you finish/error
     // await client.close();
   }
 }

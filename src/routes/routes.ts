@@ -9,7 +9,8 @@ import {
     addNewAlbum, addNewEvent,
     fetchPosts, updatePost,
     getPostInfo, addNewPost,
-    getScheduleInfo, updateSchedule
+    getScheduleInfo, updateSchedule,
+    deletePost
 } from "../controllers/dataBaseOperation"
 import { checkLogin } from "./authRouter";
 import { eventInfo } from "../models/eventInfo"
@@ -255,24 +256,36 @@ router.post("/editPost:postId", checkLogin, uploadCoverImages.any(), async funct
 
     let postId = req.params.postId.replace(":", "")
     let postInfo = req.body
-    if (!req.files[0]) {
-        await updatePost(postId, postInfo, null)
-        res.redirect("blog")
-    } else {
-        // console.log(req.files[0])
-        let coverImagePath = "https://storage.googleapis.com/lesgoepicadmin.appspot.com" + req.files[0].filename
-        await updatePost(postId, postInfo, coverImagePath)
-        res.redirect("/blog")
+    let coverImage = "https://storage.googleapis.com/lesgoepicadmin.appspot.com" + req.files[0].filename
+    let imagesPath: string[] = []
+    for (let index = 1; index < 4; index++) {
+        imagesPath.push("https://storage.googleapis.com/lesgoepicadmin.appspot.com" + req.files[index].filename)
     }
 
-
-})
+    await updatePost(postId, postInfo, imagesPath, coverImage)
+    res.redirect("/blog")
+}
+)
 
 router.post("/addNewPost", checkLogin, uploadCoverImages.any(), async function (req: any, res: Response, next: NextFunction): Promise<void> {
 
     let newPostInfo = req.body
-    let coverImagePath = "https://storage.googleapis.com/lesgoepicadmin.appspot.com" + req.files[0].filename
-    await addNewPost(newPostInfo, coverImagePath)
+    let coverImage = "https://storage.googleapis.com/lesgoepicadmin.appspot.com" + req.files[0].filename
+    let imagesPath: string[] = []
+    for (let index = 1; index < 4; index++) {
+        imagesPath.push("https://storage.googleapis.com/lesgoepicadmin.appspot.com" + req.files[index].filename)
+    }
+
+    await addNewPost(newPostInfo, imagesPath, coverImage)
+    res.redirect("blog")
+
+})
+
+router.post("/deletePost:postId", checkLogin, async function (req: Request, res: Response, next: NextFunction): Promise<void> {
+
+    let postId: string = req.params.postId.replace(":", "")
+    // console.log(eventId)
+    await deletePost(postId)
     res.redirect("blog")
 
 })

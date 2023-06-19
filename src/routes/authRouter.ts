@@ -24,7 +24,7 @@ var store = new MongoDBStore(
     //   console.log(error)
     });
 
-let GoogleStrategyUrl = "http://localhost:3000/auth/google/callback"//"https://lesgoepicadmin.de.r.appspot.com/auth/google/callback" //
+let GoogleStrategyUrl = "https://admin.lesgoepic.com/auth/google/callback" //"http://localhost:3000/auth/google/callback"//"
 authRouter.use(cookieParser());
 authRouter.use(session({
     secret: process.env.SECRET,
@@ -114,9 +114,10 @@ export function checkLogin(req: Request | any, res: Response, next: NextFunction
     if(req.isAuthenticated()){
 
         next();
+        
     }
     else{
-        res.redirect("login")
+        res.render("login")
     }
   }
 
