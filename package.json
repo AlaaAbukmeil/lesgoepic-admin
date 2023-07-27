@@ -51,5 +51,6 @@
   "license": "MIT",
   "devDependencies": {
     "@types/js-cookie": "^3.0.3"
-  }
+  },
+    "repository": "https://github.com/AlaaAbukmeil/lesgoepicAdmin.git"
 }
