@@ -1,7 +1,7 @@
 import { activePassedEvents } from "../../models/activePassedEvents";
 import proxyUrl from "../common/variables";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { getRequestOptions } from "../common/cookie";
 
 function GetActiveEvents(events: activePassedEvents) {
   let activeEvents = events.activeEvents;
@@ -10,11 +10,11 @@ function GetActiveEvents(events: activePassedEvents) {
       "Are you sure you want to delete " + eventName + "?"
     );
     let deleteUrl = proxyUrl + formaction;
+    
     if (result) {
-      await axios
-        .post(deleteUrl)
+      await fetch(deleteUrl, getRequestOptions)
         .then((res) => window.location.reload())
-        .catch((error) => console.log(error));
+      
     }
   }
   if (!events) {

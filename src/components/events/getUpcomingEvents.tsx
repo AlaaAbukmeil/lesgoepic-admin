@@ -5,25 +5,22 @@ import GetPassedEvents from "./getPassedEvents";
 import Loader from "../common/loader";
 import { activePassedEvents } from "../../models/activePassedEvents";
 import NavBar from "../common/navbar";
-import requestOptions from "../common/cookie";
+import { getRequestOptions } from "../common/cookie";
 import { handleAuth } from "../common/cookie";
 
-
 function GetUpcomingEvents() {
-
   let [events, setEvents] = useState<activePassedEvents>();
-  let url = proxyUrl + "/admin-events";
-  
+  let [activeEvents, setActiveEvents] = useState<activePassedEvents>();
+  let [passedEvents, setPassedEvents] = useState<activePassedEvents>();
+  let url = proxyUrl + "/events";
   useEffect(() => {
-    fetch(url, requestOptions)
+    fetch(url, getRequestOptions)
       .then((res) => {
-        console.log(res.status)
-        handleAuth(res.status)
+        handleAuth(res.status);
         return res.json();
       })
       .then((data) => {
         setEvents(data);
-        
       });
   }, []);
 

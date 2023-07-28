@@ -5,7 +5,10 @@ import proxyUrl from "../common/variables";
 import Loader from "../common/loader";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { act } from "@testing-library/react";
+import {getRequestOptions} from "../common/cookie";
+import { handleAuth } from "../common/cookie";
+import { postRequestOptions } from "../common/cookie";
+import NavBar from "../common/navbar";
 
 function EditEvent() {
   let params: any = useParams();
@@ -31,8 +34,9 @@ function EditEvent() {
   let [eventOrder, setEventOrder] = useState(eventInfo?.order);
 
   useEffect(() => {
-    fetch(url)
+    fetch(url, getRequestOptions)
       .then((res) => {
+        handleAuth(res.status);
         return res.json();
       })
       .then((data) => {
@@ -56,6 +60,7 @@ function EditEvent() {
         }
       });
   }, []);
+
   async function handleSubmit(action: string, event: any) {
     try {
       event.preventDefault();
@@ -63,15 +68,14 @@ function EditEvent() {
       let formData = new FormData(form);
       try {
         await axios
-          .post(action, formData)
-          .catch((error) => console.log(error));
-          navigate("/")
-        
+          .post(action, formData, postRequestOptions)
+          
+        navigate("/");
       } catch (error) {
-        console.log(error);
+        
       }
     } catch (error) {
-      console.log(error);
+      
     }
   }
 
@@ -129,6 +133,7 @@ function EditEvent() {
   if (eventInfo == null) {
     return (
       <div>
+        <NavBar />
         <Loader />
       </div>
     );
@@ -142,6 +147,7 @@ function EditEvent() {
   }
   return (
     <div>
+      <NavBar />
       <div className="title">
         <h1>{eventInfo["name"]}</h1>
       </div>

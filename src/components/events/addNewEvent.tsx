@@ -1,20 +1,24 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import proxyUrl from "../common/variables";
+import NavBar from "../common/navbar";
+import { postRequestOptions } from "../common/cookie";
 
 function AddNewEvent() {
+  let addNewAlbumUrl = proxyUrl + "/addNewEvent"
   let navigate = useNavigate();
   async function handleSubmit(event: any) {
     event.preventDefault()
     const form: any = document.getElementById("addNewEventForm");
     let formData = new FormData(form);
     await axios
-      .post(proxyUrl + "/addNewEvent", formData)
+      .post(addNewAlbumUrl, formData, postRequestOptions)
       .then((res) => navigate("/"))
-      .catch((error: any) => console.log(error));
+    
   }
   return (
     <div>
+      <NavBar />
       <div className="title">
         <h1>Add New Event</h1>
       </div>
