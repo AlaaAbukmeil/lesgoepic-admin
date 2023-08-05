@@ -1,7 +1,6 @@
 import { eventInfo } from "../../models/eventInfo";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import proxyUrl from "../common/variables";
 import Loader from "../common/loader";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +12,7 @@ import NavBar from "../common/navbar";
 function EditEvent() {
   let params: any = useParams();
   let navigate = useNavigate();
-  let url: any = proxyUrl + "/editEvent/" + params.eventId;
+  let url: any =  "https://www.lesgoepic.com/api/admin/editEvent/" + params.eventId;
   let [eventInfo, setEventDetails] = useState<eventInfo>();
   let [eventName, setEventName] = useState(eventInfo?.name);
   let [eventLocation, setEventLocation] = useState(eventInfo?.location);
@@ -67,9 +66,10 @@ function EditEvent() {
       const form: any = document.getElementById("editEventForm");
       let formData = new FormData(form);
       try {
-        await axios
+        let result = await axios
           .post(action, formData, postRequestOptions)
           
+          handleAuth(result.data.status);
         navigate("/");
       } catch (error) {
         
@@ -345,7 +345,7 @@ function EditEvent() {
                   type="button"
                   onClick={(event) =>
                     handleSubmit(
-                      proxyUrl + "/editEvent/:" + eventInfo?.["_id"],
+                      "https://www.lesgoepic.com/api/admin/editEvent/:" + eventInfo?.["_id"],
                       event
                     )
                   }

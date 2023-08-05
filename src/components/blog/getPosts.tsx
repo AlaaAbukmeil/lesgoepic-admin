@@ -1,4 +1,3 @@
-import proxyUrl from "../common/variables";
 import { Link } from "react-router-dom";
 import { getRequestOptions } from "../common/cookie";
 import { useState, useEffect } from "react";
@@ -9,7 +8,7 @@ import { postInfo } from "../../models/postInfo";
 
 function GetPosts() {
   let [posts, setPosts] = useState<postInfo[]>();
-  let url = proxyUrl + "/blog";
+  let url = "https://api.lesgoepic.com/api/admin/blog";
   useEffect(() => {
     fetch(url, getRequestOptions)
       .then((res) => {
@@ -25,7 +24,7 @@ function GetPosts() {
     let result = window.confirm(
       "Are you sure you want to delete " + albumName + "?"
     );
-    let deleteUrl = proxyUrl + formaction;
+    let deleteUrl = "https://api.lesgoepic.com/api/admin" + formaction;
     if (result) {
       await fetch(deleteUrl, getRequestOptions).then((res) =>
         window.location.reload()

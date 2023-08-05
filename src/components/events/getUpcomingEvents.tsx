@@ -1,4 +1,3 @@
-import proxyUrl from "../common/variables";
 import { useState, useEffect } from "react";
 import GetActiveEvents from "./getActiveEvents";
 import GetPassedEvents from "./getPassedEvents";
@@ -12,7 +11,7 @@ function GetUpcomingEvents() {
   let [events, setEvents] = useState<activePassedEvents>();
   let [activeEvents, setActiveEvents] = useState<activePassedEvents>();
   let [passedEvents, setPassedEvents] = useState<activePassedEvents>();
-  let url = proxyUrl + "/events";
+  let url =  "https://www.lesgoepic.com/api/admin/events";
   useEffect(() => {
     fetch(url, getRequestOptions)
       .then((res) => {

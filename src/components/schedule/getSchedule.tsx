@@ -1,4 +1,3 @@
-import proxyUrl from "../common/variables";
 import { useEffect, useState } from "react";
 import { scheduleInfo } from "../../models/scheduleInfo";
 import NavBar from "../common/navbar";
@@ -10,8 +9,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function GetSchedule() {
-  let actionUrl = proxyUrl + "/editSchedule/:6474717f3ca184eb978e3e61";
-  let getScheduleInfoUrl = proxyUrl + "/monthlySchedule";
+  let actionUrl = "https://api.lesgoepic.com/api/admin/editSchedule/:6474717f3ca184eb978e3e61";
+  let getScheduleInfoUrl = "https://api.lesgoepic.com/api/admin/monthlySchedule";
   let navigate = useNavigate();
   let [scheduleInfo, setSchedule] = useState<scheduleInfo>();
   let [scheduleInfoTime, setScheduleInfoTime] = useState(

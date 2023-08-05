@@ -1,4 +1,3 @@
-import proxyUrl from "../common/variables";
 import { useState, useEffect } from "react";
 import NavBar from "../common/navbar";
 import { getRequestOptions } from "../common/cookie";
@@ -12,7 +11,7 @@ function ViewResponses() {
   let [formName, setFormName] = useState();
   let params: any = useParams();
 
-  let url: any = proxyUrl + "/form/:" + params.formId;
+  let url: any = "https://api.lesgoepic.com/api/admin/form/:" + params.formId;
   useEffect(() => {
     fetch(url, getRequestOptions)
       .then((res) => {

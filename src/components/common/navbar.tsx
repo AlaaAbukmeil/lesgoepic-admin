@@ -1,5 +1,12 @@
-import proxyUrl from "./variables"
+import { useNavigate } from "react-router-dom";
+
 function NavBar(){
+  const navigate = useNavigate();
+  function handleLogOut(event: any){
+    localStorage.removeItem('token');
+    navigate("/login")
+  }
+
     return(<nav className="navbar navbar-expand-lg  navbar-custom">
     <div className="container-fluid">
       <a href="/">
@@ -26,7 +33,7 @@ function NavBar(){
             <a className="nav-link active header-item" aria-current="page" href="/posts">Posts</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link active header-item" aria-current="page" href={proxyUrl + "/logout"}>Log Out</a>
+            <button className="nav-link active header-item" aria-current="page" onClick={(event) => handleLogOut(event)}>Log Out</button>
           </li>
         </ul>
       </div>

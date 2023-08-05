@@ -107,6 +107,10 @@ body, html {
 .linkElement{
   margin-left: auto;
 }
+.error{
+  color: #EE2730;
+  text-align: center;
+}
 
 @media only screen and (max-width: 600px) {
   .youtubeVideo {

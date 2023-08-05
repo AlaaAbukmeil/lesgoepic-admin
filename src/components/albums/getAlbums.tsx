@@ -1,4 +1,3 @@
-import proxyUrl from "../common/variables";
 import { useState, useEffect } from "react";
 import NavBar from "../common/navbar";
 import {getRequestOptions} from "../common/cookie";
@@ -9,7 +8,7 @@ import { Link } from "react-router-dom";
 
 function GetAlbums() {
   let [albums, setAlbums] = useState<albumInfo[]>();
-  let url = proxyUrl + "/albums";
+  let url = "https://api.lesgoepic.com/api/admin/albums";
   useEffect(() => {
     fetch(url, getRequestOptions)
       .then((res) => {
@@ -24,7 +23,7 @@ function GetAlbums() {
     let result = window.confirm(
       "Are you sure you want to delete " + albumName + "?"
     );
-    let deleteUrl = proxyUrl + formaction;
+    let deleteUrl = "https://api.lesgoepic.com/api/admin" + formaction;
     if (result) {
       await fetch
         (deleteUrl, getRequestOptions )

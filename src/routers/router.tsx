@@ -13,6 +13,7 @@ import EditPost from "../components/blog/editPost";
 import AddNewPost from "../components/blog/addPost";
 import GetForms from "../components/forms/getForms";
 import ViewResponses from "../components/forms/viewResponses";
+import SignUp from "../components/common/signUp";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,11 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/signUp",
+    element: <SignUp />,
     errorElement: <ErrorPage />,
   },
   {

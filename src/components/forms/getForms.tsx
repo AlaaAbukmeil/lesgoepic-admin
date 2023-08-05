@@ -1,4 +1,3 @@
-import proxyUrl from "../common/variables";
 import { useState, useEffect } from "react";
 import GetActiveForms from "./getActiveForms";
 import GetPassedForms from "./getPassedForms";
@@ -10,7 +9,7 @@ import { handleAuth } from "../common/cookie";
 
 function GetForms() {
   let [formsData, setForms] = useState<formsData>();
-  let url = proxyUrl + "/forms";
+  let url = "https://api.lesgoepic.com/api/admin/forms";
   useEffect(() => {
     fetch(url, getRequestOptions)
       .then((res) => {

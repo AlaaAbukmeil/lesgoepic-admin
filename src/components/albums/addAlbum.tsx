@@ -1,11 +1,10 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import proxyUrl from "../common/variables";
 import NavBar from "../common/navbar";
 import { postRequestOptions } from "../common/cookie";
 function AddNewAlbum() {
     let navigate = useNavigate();
-    let actionUrl = proxyUrl + "/addNewAlbum"
+    let actionUrl = "https://api.lesgoepic.com/api/admin/addNewAlbum"
     async function handleSubmit(event: any) {
       event.preventDefault()
       const form: any = document.getElementById("addNewAlbum");

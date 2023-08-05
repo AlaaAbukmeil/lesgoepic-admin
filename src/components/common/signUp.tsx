@@ -3,19 +3,22 @@ import Loader from "./loader";
 import { useState } from "react";
 import axios from "axios";
 import { auth } from "../../models/auth";
-function Login() {
+function SignUp() {
   let [requestStatus, setRequestStatus] = useState(false);
   let [authStatus, setAuthStatus] = useState("");
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
+  let [verficationCode, setVerficationCode] = useState("");
   async function handleSubmit(event: any) {
+    event.preventDefault()
     setRequestStatus(true);
-    let formData = {"username": username, "password": password}
+    let formData = {"username": username, "password": password, "verificationCode": verficationCode}
     try {
-      let auth: auth = await axios.post("https://www.lesgoepic.com/api/admin/login", formData, authPostRequestOptions);
+      let auth: auth = await axios.post("https://api.lesgoepic.com/api/admin/signUp", formData, authPostRequestOptions);
+      console.log(auth)
       if(auth.data.status == 200){
         localStorage.setItem('token', auth.data.token);
-        window.location.href = "/";
+        window.location.href = "/login";
 
       }
       else{
@@ -24,6 +27,7 @@ function Login() {
       }
 
     } catch (error) {
+      console.log(error)
     }
     
     setRequestStatus(false);
@@ -33,6 +37,9 @@ function Login() {
   }
   function onChangePassword(event: any) {
     setPassword(event.target.value);
+  }
+  function onChangeVerficationCode(event: any) {
+    setVerficationCode(event.target.value);
   }
 
   if (requestStatus) {
@@ -46,7 +53,7 @@ function Login() {
   return (
     <div>
       <div className="container mt-5">
-        <h1>LesGo Epic Admin Login</h1>
+        <h1>LesGo Epic Admin Sign Up</h1>
       </div>
 
       <div className="row">
@@ -77,17 +84,30 @@ function Login() {
               onChange={(event) => onChangePassword(event)}
             />
           </div>
+          <div>
+            <h4>
+              <b>Verfication Code</b>
+            </h4>
+            <input
+              type="password"
+              className="formTextInput"
+              title="verificationCode"
+              name="verificationCode"
+              value={verficationCode}
+              onChange={(event) => onChangeVerficationCode(event)}
+            />
+          </div>
           {authStatus && <h4 className="error">{authStatus}</h4>}
           <button
             type="button"
             onClick={(event) => handleSubmit(event)}
             className="btn addNewEventButton"
           >
-            Login
+            Sign Up
           </button>
         </form>
       </div>
     </div>
   );
 }
-export default Login;
+export default SignUp;

@@ -1,5 +1,4 @@
 import { activePassedEvents } from "../../models/activePassedEvents";
-import proxyUrl from "../common/variables";
 import { Link } from "react-router-dom";
 import {getRequestOptions} from "../common/cookie";
 function GetPassedEvents(events: activePassedEvents) {
@@ -8,7 +7,7 @@ function GetPassedEvents(events: activePassedEvents) {
     let result = window.confirm(
       "Are you sure you want to delete " + eventName + "?"
     );
-    let deleteUrl = proxyUrl + formaction
+    let deleteUrl = "https://api.lesgoepic.com/api/admin" + formaction
     if (result) {
       await fetch(deleteUrl, getRequestOptions).then((res) => window.location.reload())
     }

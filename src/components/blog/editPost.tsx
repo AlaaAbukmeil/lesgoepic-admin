@@ -1,10 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import proxyUrl from "../common/variables";
 import Loader from "../common/loader";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {getRequestOptions} from "../common/cookie";
+import { getRequestOptions } from "../common/cookie";
 import { handleAuth } from "../common/cookie";
 import { postRequestOptions } from "../common/cookie";
 import NavBar from "../common/navbar";
@@ -13,7 +12,8 @@ import { postInfo } from "../../models/postInfo";
 function EditPost() {
   let params: any = useParams();
   let navigate = useNavigate();
-  let url: any = proxyUrl + "/editPost/" + params.postId;
+  let url: any =
+    "https://api.lesgoepic.com/api/admin/editPost/" + params.postId;
   let [postInfo, setPostInfo] = useState<postInfo>();
   let [postName, setPostName] = useState(postInfo?.name);
   let [postDate, setPostDate] = useState(postInfo?.date);
@@ -165,7 +165,13 @@ function EditPost() {
 
                 <button
                   type="button"
-                  onClick={(event) => handleSubmit(proxyUrl + "/editPost/" + params?.postId, event)}
+                  onClick={(event) =>
+                    handleSubmit(
+                      "https://api.lesgoepic.com/api/admin/editPost/" +
+                        params?.postId,
+                      event
+                    )
+                  }
                   className="btn editButton"
                 >
                   Edit

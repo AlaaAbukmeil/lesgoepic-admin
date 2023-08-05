@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import proxyUrl from "../common/variables";
 import Loader from "../common/loader";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +12,7 @@ import { albumInfo } from "../../models/albumInfo";
 function EditAlbum() {
   let params: any = useParams();
   let navigate = useNavigate();
-  let url: any = proxyUrl + "/editAlbum/" + params.albumId;
+  let url: any ="https://api.lesgoepic.com/api/admin/editAlbum/" + params.albumId;
   let [albumInfo, setAlbumInfo] = useState<albumInfo>();
   let [albumName, setAlbumName] = useState(albumInfo?.name);
   let [albumDate, setAlbumDate] = useState(albumInfo?.date);
@@ -154,7 +153,7 @@ function EditAlbum() {
                   type="button"
                   onClick={(event) =>
                     handleSubmit(
-                      proxyUrl + "/editAlbum/:" + albumInfo?.["_id"],
+                      "https://api.lesgoepic.com/api/admin/editAlbum/:" + albumInfo?.["_id"],
                       event
                     )
                   }
