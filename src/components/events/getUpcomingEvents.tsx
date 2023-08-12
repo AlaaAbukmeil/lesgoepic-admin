@@ -11,7 +11,7 @@ function GetUpcomingEvents() {
   let [events, setEvents] = useState<activePassedEvents>();
   let [activeEvents, setActiveEvents] = useState<activePassedEvents>();
   let [passedEvents, setPassedEvents] = useState<activePassedEvents>();
-  let url =  "https://www.lesgoepic.com/api/admin/events";
+  let url =  "https://api.lesgoepic.com/api/admin/events";
   useEffect(() => {
     fetch(url, getRequestOptions)
       .then((res) => {

@@ -1,17 +1,13 @@
 import { useState, useEffect } from "react";
 import NavBar from "../common/navbar";
-import { getRequestOptions } from "../common/cookie";
+import { getRequestOptions, postRequestOptions } from "../common/cookie";
 import { handleAuth } from "../common/cookie";
 import Loader from "../common/loader";
-import { useParams } from "react-router-dom";
 
-function ViewResponses() {
-  let [formResponses, setFormResponses] = useState<any>();
-  let [tableTitles, setTableTitles] = useState<any>();
-  let [formName, setFormName] = useState();
-  let params: any = useParams();
-
-  let url: any = "https://api.lesgoepic.com/api/admin/form/:" + params.formId;
+function Feedback() {
+  let [feedback, setFeedback] = useState<any>([]);
+  let tableTitles: any = ["timestamp", "responses"];
+  let url: any = "https://api.lesgoepic.com/api/admin/feedback";
   useEffect(() => {
     fetch(url, getRequestOptions)
       .then((res) => {
@@ -19,31 +15,10 @@ function ViewResponses() {
         return res.json();
       })
       .then((data) => {
-        setFormResponses(data?.responses);
-        setFormName(data?.formName);
-        if (data?.responses[0]) {
-          setTableTitles(Object.keys(data?.responses[0]));
-        }
+        setFeedback(data);
       });
   }, []);
 
-  if (formResponses == null) {
-    return (
-      <div>
-        <NavBar />
-        <Loader />
-      </div>
-    );
-  } else if (formResponses.length == 0) {
-    return (
-      <div>
-        <NavBar />
-        <div className="title">
-          <h4>No Responses</h4>
-        </div>
-      </div>
-    );
-  }
   function downloadCSV() {
     // Get the HTML table element
     var table: any = document.getElementById("table-id");
@@ -73,32 +48,40 @@ function ViewResponses() {
     // Create a new link element for the download
     var link = document.createElement("a");
     link.setAttribute("href", url);
-    link.setAttribute("download", `${formName}.csv`);
+    link.setAttribute("download", "feedback.csv");
 
     // Trigger the download by clicking the link
     link.click();
   }
 
+  if (!feedback) {
+    return <Loader />;
+  }
   return (
     <div>
       <NavBar />
+
       <div className="title">
-        <h1>{formName}</h1>
+        <h1>Feedback</h1>
       </div>
 
       <table id="table-id">
         <tbody>
           <tr>
-            {tableTitles.slice(5).map((title: string, index: number) => (
+            {tableTitles.map((title: string, index: number) => (
               <th key={index}>{title}</th>
             ))}
           </tr>
 
-          {formResponses.map((response: string[], index: number) => (
+          {feedback.map((response: any, index: number) => (
             <tr key={index}>
-              {tableTitles.slice(5).map((title: string, index: number) => (
+              {tableTitles.map((title: string, index: number) => (
                 <td key={index}>
-                  {response[tableTitles[index + 5]]?.slice(0, 50)}
+                  {title == "responses"
+                    ? response[title].map((answer: string, index: number) => (
+                        <p key={index}>{answer}</p>
+                      ))
+                    : response[title]}
                 </td>
               ))}
             </tr>
@@ -116,4 +99,4 @@ function ViewResponses() {
     </div>
   );
 }
-export default ViewResponses;
+export default Feedback;

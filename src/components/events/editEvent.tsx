@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Loader from "../common/loader";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {getRequestOptions} from "../common/cookie";
+import { getRequestOptions } from "../common/cookie";
 import { handleAuth } from "../common/cookie";
 import { postRequestOptions } from "../common/cookie";
 import NavBar from "../common/navbar";
@@ -12,7 +12,8 @@ import NavBar from "../common/navbar";
 function EditEvent() {
   let params: any = useParams();
   let navigate = useNavigate();
-  let url: any =  "https://www.lesgoepic.com/api/admin/editEvent/" + params.eventId;
+  let url: any =
+    "https://api.lesgoepic.com/api/admin/editEvent/" + params.eventId;
   let [eventInfo, setEventDetails] = useState<eventInfo>();
   let [eventName, setEventName] = useState(eventInfo?.name);
   let [eventLocation, setEventLocation] = useState(eventInfo?.location);
@@ -29,6 +30,7 @@ function EditEvent() {
   let [eventNotes, setEventNotes] = useState(eventInfo?.notes);
   let [eventStripe, setEventStripe] = useState(eventInfo?.stripe);
   let [eventTimeslots, setEventTimeslots] = useState(eventInfo?.timeslots);
+  let [eventMeetingUpDetails, setEventMeetingUpDetails] = useState(eventInfo?.meetingUpDetails);
   let [eventGoogleMaps, setEventGoogleMaps] = useState(eventInfo?.googleMaps);
   let [eventOrder, setEventOrder] = useState(eventInfo?.order);
 
@@ -53,6 +55,7 @@ function EditEvent() {
           setEventStripe(data.eventInfo.stripe);
           setEventTimeslots(data.eventInfo.timeslots);
           setEventGoogleMaps(data.eventInfo.googleMaps);
+          setEventMeetingUpDetails(data.eventInfo.meetingUpDetails)
           setEventOrder(data.eventInfo.order);
         } else {
           setEventDetails(data.status);
@@ -66,17 +69,12 @@ function EditEvent() {
       const form: any = document.getElementById("editEventForm");
       let formData = new FormData(form);
       try {
-        let result = await axios
-          .post(action, formData, postRequestOptions)
-          
-          handleAuth(result.data.status);
+        let result = await axios.post(action, formData, postRequestOptions);
+
+        handleAuth(result.data.status);
         navigate("/");
-      } catch (error) {
-        
-      }
-    } catch (error) {
-      
-    }
+      } catch (error) {}
+    } catch (error) {}
   }
 
   function nameInputOnChange(event: any) {
@@ -121,7 +119,9 @@ function EditEvent() {
   function timeslotsInputOnChange(event: any) {
     setEventTimeslots(event.target.value);
   }
-
+  function meetingUpDetailsInputOnChange(event: any) {
+    setEventMeetingUpDetails(event.target.value);
+  }
   function googleMapsInputOnChange(event: any) {
     setEventGoogleMaps(event.target.value);
   }
@@ -316,6 +316,19 @@ function EditEvent() {
                 />
 
                 <h4 className="name">
+                  <b>Meeting Up Details:</b>{" "}
+                </h4>
+                <input
+                  type="text"
+                  name="meetingUpDetails"
+                  className="formTextInput"
+                  value={eventMeetingUpDetails}
+                  onChange={meetingUpDetailsInputOnChange}
+                  placeholder={eventInfo.meetingUpDetails}
+                  required
+                />
+
+                <h4 className="name">
                   <b>Google Maps:</b>{" "}
                 </h4>
                 <input
@@ -345,7 +358,8 @@ function EditEvent() {
                   type="button"
                   onClick={(event) =>
                     handleSubmit(
-                      "https://www.lesgoepic.com/api/admin/editEvent/:" + eventInfo?.["_id"],
+                      "https://api.lesgoepic.com/api/admin/editEvent/:" +
+                        eventInfo?.["_id"],
                       event
                     )
                   }

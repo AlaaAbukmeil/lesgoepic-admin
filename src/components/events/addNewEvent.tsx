@@ -4,16 +4,15 @@ import NavBar from "../common/navbar";
 import { postRequestOptions } from "../common/cookie";
 
 function AddNewEvent() {
-  let addNewAlbumUrl = "https://api.lesgoepic.com/api/admin/addNewEvent"
+  let addNewAlbumUrl = "https://api.lesgoepic.com/api/admin/addNewEvent";
   let navigate = useNavigate();
   async function handleSubmit(event: any) {
-    event.preventDefault()
+    event.preventDefault();
     const form: any = document.getElementById("addNewEventForm");
     let formData = new FormData(form);
     await axios
       .post(addNewAlbumUrl, formData, postRequestOptions)
-      .then((res) => navigate("/"))
-    
+      .then((res) => navigate("/"));
   }
   return (
     <div>
@@ -166,6 +165,17 @@ function AddNewEvent() {
                   name="stripe"
                   className="formTextInput"
                   placeholder="Enter Stripe URL payment link"
+                  required
+                />
+
+                <h4 className="name">
+                  <b>Meeting Up Details:</b>{" "}
+                </h4>
+                <input
+                  type="text"
+                  name="meetingUpDetails"
+                  className="formTextInput"
+                  placeholder="Enter meeting up details"
                   required
                 />
 

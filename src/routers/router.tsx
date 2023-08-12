@@ -14,7 +14,8 @@ import AddNewPost from "../components/blog/addPost";
 import GetForms from "../components/forms/getForms";
 import ViewResponses from "../components/forms/viewResponses";
 import SignUp from "../components/common/signUp";
-
+import CustomersInfo from "../components/customers/customersInfo";
+import Feedback from "../components/common/feedback";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -84,6 +85,16 @@ const router = createBrowserRouter([
   {
     path: "/form/:formId",
     element: <ViewResponses />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/customers",
+    element: <CustomersInfo />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/feedback",
+    element: <Feedback />,
     errorElement: <ErrorPage />,
   }
 ]);

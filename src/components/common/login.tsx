@@ -12,7 +12,7 @@ function Login() {
     setRequestStatus(true);
     let formData = {"username": username, "password": password}
     try {
-      let auth: auth = await axios.post("https://www.lesgoepic.com/api/admin/login", formData, authPostRequestOptions);
+      let auth: auth = await axios.post("https://api.lesgoepic.com/api/admin/login", formData, authPostRequestOptions);
       if(auth.data.status == 200){
         localStorage.setItem('token', auth.data.token);
         window.location.href = "/";

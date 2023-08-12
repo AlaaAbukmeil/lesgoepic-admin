@@ -9,6 +9,7 @@ export class eventInfo {
         public display: string | undefined,
         public shortDescription: string | undefined,
         public description: string | undefined,
+        public meetingUpDetails: string | undefined,
         public questions: string,
         public notes: string | undefined,
         public stripe: string | undefined,

@@ -33,6 +33,12 @@ function NavBar(){
             <a className="nav-link active header-item" aria-current="page" href="/posts">Posts</a>
           </li>
           <li className="nav-item">
+            <a className="nav-link active header-item" aria-current="page" href="/customers">Customers</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link active header-item" aria-current="page" href="/feedback">Feedback</a>
+          </li>
+          <li className="nav-item">
             <button className="nav-link active header-item" aria-current="page" onClick={(event) => handleLogOut(event)}>Log Out</button>
           </li>
         </ul>
