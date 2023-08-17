@@ -141,9 +141,9 @@ function EditEvent() {
 
   let display;
   if (eventInfo.display == "true") {
-    display = ["True", "False"];
+    display = ["true", "false"];
   } else {
-    display = ["False", "True"];
+    display = ["false", "true"];
   }
   return (
     <div>
@@ -272,8 +272,8 @@ function EditEvent() {
                   placeholder={eventInfo.display}
                   required
                 >
-                  <option value="true">{display[0]}</option>
-                  <option value="false">{display[1]}</option>
+                  <option value={display[0]}>{display[0]}</option>
+                  <option value={display[1]}>{display[1]}</option>
                 </select>
 
                 <h4 className="name">

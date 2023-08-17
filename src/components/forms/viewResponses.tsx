@@ -10,6 +10,7 @@ function ViewResponses() {
   let [tableTitles, setTableTitles] = useState<any>();
   let [formName, setFormName] = useState();
   let params: any = useParams();
+  const unWantedTitles = ["userEventId", "eventId", "eventMeetingUpDetails", "eventImage"]
 
   let url: any = "https://api.lesgoepic.com/api/admin/form/:" + params.formId;
   useEffect(() => {
@@ -22,7 +23,8 @@ function ViewResponses() {
         setFormResponses(data?.responses);
         setFormName(data?.formName);
         if (data?.responses[0]) {
-          setTableTitles(Object.keys(data?.responses[0]));
+          let wantedTitles = Object.keys(data?.responses[0]).filter(title => !unWantedTitles.includes(title));
+          setTableTitles(wantedTitles);
         }
       });
   }, []);
@@ -98,7 +100,7 @@ function ViewResponses() {
             <tr key={index}>
               {tableTitles.slice(5).map((title: string, index: number) => (
                 <td key={index}>
-                  {response[tableTitles[index + 5]]?.slice(0, 50)}
+                  {response[tableTitles[index + 5]]}
                 </td>
               ))}
             </tr>

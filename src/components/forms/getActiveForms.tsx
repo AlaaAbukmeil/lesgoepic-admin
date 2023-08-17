@@ -20,7 +20,7 @@ function GetActiveForms(formsData: formsData) {
                     to={"/form/" + form["_id"]}
                     className="btn signupButton linkElement"
                   >
-                    Edit
+                    View Responses
                   </Link>
                 </div>
               </div>
